@@ -1,15 +1,16 @@
 import multiprocessing
 import random
+from datetime import datetime
 import time
 
-def whatTimeIsIt():
-    now = time.time()
-    print(f"It's {time.ctime(now)}")
+
+def whatTimeIsIt(num):
+    randSec = random.random()
+    time.sleep(randSec)
+    print(f"I'm process {num}, and It's {datetime.now()}.")
 
 if __name__ == "__main__":
     for n in range(3):
-        randSec = random.random()
-        time.sleep(randSec)
-        p = multiprocessing.Process(target=whatTimeIsIt)
-        p.start()
-        p.join()
+        p = multiprocessing.Process(target=whatTimeIsIt, args=str(n))
+        p.start() 
+
